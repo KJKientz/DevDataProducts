@@ -1,0 +1,24 @@
+---
+title: "DEVEOPING DATA PRODUCTS - course project"
+author: "Kevin Kientz"
+date: "July 12, 2016"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## My application
+
+Using the Integrated Postsecondary Education Data System (IPEDS) data from the national center for education statistics website (http://nces.ed.gov/ipeds/datacenter/DataFiles.aspx), I developed an application using shiny. The app allows users to select a U.S. state or territory and determine how many institutions of higher education exist within that state. An interactive histogram shows how many states have:
+
+* 0-100 institutions
+* 100-200 institutions
+* 200-300 institutions
+* 300-400 institutions
+* 400-500 institutions
+* 500-600 institutions
+* 600-700 institutions
+* 700-800 institutions
+
+The histogram also displays the "median state" which has 96 institutions, and reactively draws a vertical line indicating the # of institutions that exist in the selected state.
