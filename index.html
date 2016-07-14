@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products Course Project</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products Course Project">
+  <meta name="author" content="Kevin Kientz">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products Course Project</h1>
+    <h2>Higher Education Institution Count Application</h2>
+    <p>Kevin Kientz<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Objective</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Write &amp; deploy a shiny app. The application must include:</p>
+
+<ul>
+<li>Some form of input (widget: textbox, radio button, checkbox, etc.)</li>
+<li>Some operation on the ui input in sever.R</li>
+<li>Some reactive output displayed as a result of server calculations</li>
+<li>You must also include enough documentation so that a novice user could use your application</li>
+<li>The documentation should be at the Shiny website itself. Do not post to an external link</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Project Description</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The app I developed allows you to:</p>
+
+<ul>
+<li>Determine how many institutions of higher education exist within a selected state</li>
+<li>Benchmark that state&#39;s number of institutions against other states</li>
+<li>See the state that represents the median number of states (the state with the 25th highest # of institutions - right in the middle)</li>
+</ul>
+
+<p>Use this app at <a href="https://kjkientz.shinyapps.io/ShinyProject/">https://kjkientz.shinyapps.io/ShinyProject/</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Higher Education State Institution Counts</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following code allows me to load in the most recent (2014) dataset of institutions of higher education from the National Center for Education Statistics. The state_df data frame aggregates the number of institutions contained within each state or province.</p>
+
+<pre><code class="r">temp &lt;- tempfile()
+download.file(&quot;http://nces.ed.gov/ipeds/datacenter/data/HD2014.zip&quot;,temp, mode=&quot;wb&quot;)
+unzip(temp, &quot;hd2014.csv&quot;)
+dd &lt;- read.table(&quot;hd2014.csv&quot;, sep=&quot;,&quot;, header=T)
+
+state_df &lt;- as.data.frame(table(dd$STABBR))
+
+institutionsByState &lt;- function(state) state_df[state_df$Var1==state,2]
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Higher Education State Institution Counts</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The shiny app is designed to allow a user to select a state and you can immediately see how many institutions exist within that state. For example, if the user selects &quot;California&quot;, we can see how many institutions are in California: </p>
+
+<pre><code>## Error in institutionsByState(&quot;CA&quot;): object &#39;state_df&#39; not found
+</code></pre>
+
+<p>Give it a shot at <a href="https://kjkientz.shinyapps.io/ShinyProject/">https://kjkientz.shinyapps.io/ShinyProject/</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Objective'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Project Description'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Higher Education State Institution Counts'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Higher Education State Institution Counts'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
